@@ -127,6 +127,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               .collection('usersDoc')
               .doc(_receivedUID)
               .set({
+            'id': _receivedUID,
             'userName': userName,
             'email': email,
             'imageURL': imageUrl,
