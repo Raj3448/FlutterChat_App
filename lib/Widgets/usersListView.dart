@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 
 class UsersListView extends StatelessWidget {
   final dynamic user;
-  const UsersListView({required this.user,  Key? key})
-      : super(key: key);
+  const UsersListView({required this.user, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChatWindow(receiverInfo: user)));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ChatWindow(receiverInfo: user)));
       },
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.1,
+        height: MediaQuery.of(context).size.height * 0.08,
         margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
         decoration: BoxDecoration(
-            border: Border.all(width: 0.5, color: Colors.grey),
+            color: const Color.fromARGB(255, 236, 235, 235),
             borderRadius: BorderRadius.circular(20)),
         child: Center(
           child: ListTile(

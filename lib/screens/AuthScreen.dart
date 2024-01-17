@@ -1,5 +1,6 @@
 import 'package:chatapp/Widgets/Auth/AuthWidget.dart';
-import 'package:chatapp/bloc/autth_bloc.dart';
+import 'package:chatapp/bloc/Auth/autth_bloc.dart';
+
 import 'package:chatapp/screens/rootScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

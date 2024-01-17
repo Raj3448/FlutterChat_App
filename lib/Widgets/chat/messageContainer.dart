@@ -1,4 +1,4 @@
-import 'package:chatapp/bloc/autth_bloc.dart';
+
 import 'package:flutter/material.dart';
 
 class MessageContainer extends StatelessWidget {
@@ -49,7 +49,6 @@ class MessageContainer extends StatelessWidget {
             ),
           ],
         ),
-        
         Positioned(
           top: -7,
           left: isMe ? MediaQuery.of(context).size.width * 0.67 : null,

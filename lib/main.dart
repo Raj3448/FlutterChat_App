@@ -1,6 +1,8 @@
 import 'package:chatapp/api/FirebaseNotifyApi.dart';
 import 'package:chatapp/app_bloc_observer.dart';
-import 'package:chatapp/bloc/autth_bloc.dart';
+import 'package:chatapp/bloc/Auth/autth_bloc.dart';
+
+import 'package:chatapp/cubit/UserDetailsCubit/UserDetailsCubit.dart';
 import 'package:chatapp/firebase_options.dart';
 
 import 'package:chatapp/screens/AuthScreen.dart';
@@ -28,6 +30,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AuthBloc()),
+        BlocProvider(create: (context) => UserDetailsCubit())
       ],
       child: MaterialApp(
           title: 'ChatHUB',
@@ -37,9 +40,6 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           home: const AuthScreen(),
-          routes: {
-            
-          },
           ),
     );
   }

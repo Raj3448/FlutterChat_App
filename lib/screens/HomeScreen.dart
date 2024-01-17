@@ -1,13 +1,15 @@
+import 'package:auto_route/annotations.dart';
 import 'package:chatapp/Widgets/chat/messages.dart';
 import 'package:chatapp/Widgets/chat/new_message.dart';
-import 'package:chatapp/bloc/autth_bloc.dart';
+import 'package:chatapp/bloc/Auth/autth_bloc.dart';
+
 import 'package:chatapp/screens/AuthScreen.dart';
 import 'package:chatapp/screens/loadingPage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+@RoutePage()
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 

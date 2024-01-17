@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:chatapp/bloc/autth_bloc.dart';
+import 'package:chatapp/bloc/Auth/autth_bloc.dart';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
@@ -19,8 +20,7 @@ class AuthWidget extends StatefulWidget {
   get getFocus3 => userNameFocusNode;
 
 
-  factory AuthWidget(
-      ) {
+  factory AuthWidget() {
     _singleInstance ??= AuthWidget._empty();
     return _singleInstance!;
   }
