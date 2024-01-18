@@ -4,13 +4,14 @@ part of 'group_details_bloc.dart';
 @immutable
 sealed class GroupDetailsEvent {}
 
-class AddGroupDetails extends GroupDetailsEvent {
-  String groupName;
-  File groupImage;
+class AddGroupDetailsInDatabase extends GroupDetailsEvent {
+  String? groupName;
+  File? groupImage;
   List<UserDetails> userDetailList;
-  AddGroupDetails({
+  AddGroupDetailsInDatabase({
     required this.groupName,
     required this.groupImage,
     required this.userDetailList,
   });
 }
+class AddGroupImage extends GroupDetailsEvent{}

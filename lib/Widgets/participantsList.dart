@@ -32,43 +32,40 @@ class _ParticipantsListState extends State<ParticipantsList> {
           ),
           borderRadius: const BorderRadius.all(Radius.circular(20))),
       child: ListTile(
-        leading: Container(
-          height: 70,
-          width: 70,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
+          leading: Container(
+            height: 70,
+            width: 70,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: Image.network(widget.participantsList['imageURL'],
+                fit: BoxFit.cover),
           ),
-          clipBehavior: Clip.antiAlias,
-          child: Image.network(widget.participantsList['imageURL'],
-              fit: BoxFit.cover),
-        ),
-        title: Text(
-          widget.participantsList['userName'],
-          style: const TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
-        ),
-        trailing:
-            Checkbox(
-                value: isSelected,
-                onChanged: (value) {
-                  setState(() {
-                    isSelected = (value!);
-                  });
-                  if (value!) {
-                    context
-                        .read<UserDetailsCubit>()
-                        .addUserDetailsInList(UserDetails(
-                          id: widget.participantsList['id'],
-                          username: widget.participantsList['userName'],
-                          imageUrl: widget.participantsList['imageURL'],
-                          email: widget.participantsList['email'],
-                        ));
-                  } else {
-                    context.read<UserDetailsCubit>().removeUserDetailsInList(
-                        id: widget.participantsList['id']);
-                  }
-                })
-      ),
+          title: Text(
+            widget.participantsList['userName'],
+            style: const TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+          ),
+          trailing: Checkbox(
+              value: isSelected,
+              onChanged: (value) {
+                isSelected = (value!);
+
+                if (value) {
+                  context
+                      .read<UserDetailsCubit>()
+                      .addUserDetailsInList(UserDetails(
+                        id: widget.participantsList['id'],
+                        username: widget.participantsList['userName'],
+                        imageUrl: widget.participantsList['imageURL'],
+                        email: widget.participantsList['email'],
+                      ));
+                } else {
+                  context.read<UserDetailsCubit>().removeUserDetailsInList(
+                      id: widget.participantsList['id']);
+                }
+              })),
     );
   }
 }

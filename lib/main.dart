@@ -1,6 +1,7 @@
 import 'package:chatapp/api/FirebaseNotifyApi.dart';
 import 'package:chatapp/app_bloc_observer.dart';
 import 'package:chatapp/bloc/Auth/autth_bloc.dart';
+import 'package:chatapp/bloc/GroupDetails/bloc/group_details_bloc.dart';
 
 import 'package:chatapp/cubit/UserDetailsCubit/UserDetailsCubit.dart';
 import 'package:chatapp/firebase_options.dart';
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AuthBloc()),
-        BlocProvider(create: (context) => UserDetailsCubit())
+        BlocProvider(create: (context) => UserDetailsCubit()),
+        BlocProvider(create: (context) => GroupDetailsBloc())
       ],
       child: MaterialApp(
           title: 'ChatHUB',
