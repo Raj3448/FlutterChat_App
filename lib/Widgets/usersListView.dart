@@ -1,5 +1,5 @@
-import 'package:chatapp/screens/chatWindow.dart';
-import 'package:chatapp/screens/group_chat_window.dart';
+import 'package:chatapp/screens/Chats/chatWindow.dart';
+import 'package:chatapp/screens/GroupChats/group_chat_window.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

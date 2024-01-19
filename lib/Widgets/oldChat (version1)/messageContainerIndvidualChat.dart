@@ -32,7 +32,7 @@ class MessageContainerIndvidualChat extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
               horizontal: 5,
             ),
-            constraints: message.length > 50
+            constraints: message.length > 40
                 ? BoxConstraints(
                     maxWidth: MediaQuery.of(context).size.width * 0.7,
                   )

@@ -37,11 +37,13 @@ class GroupDetailsBloc extends Bloc<GroupDetailsEvent, GroupDetailsState> {
           .whenComplete(
               () => print('GroupImage Uploaded Successfully.....!!!'));
       String groupImgUrl = await imageRefrence.getDownloadURL();
+      final currentUser = FirebaseAuth.instance.currentUser;
       DocumentReference<Map<String, dynamic>> documentReference =
           await collectionReference.add({
         'id': uniqueId,
         'groupName': event.groupName!.trim(),
         'groupImageURL': groupImgUrl,
+        'UID': currentUser!.uid,
       });
       CollectionReference<Map<String, dynamic>> subCollectionReference =
           documentReference.collection('usersList');
@@ -56,17 +58,20 @@ class GroupDetailsBloc extends Bloc<GroupDetailsEvent, GroupDetailsState> {
       final currentUser = FirebaseAuth.instance.currentUser;
       final DocumentSnapshot<Map<String, dynamic>> userData =
           await FirebaseFirestore.instance
-              .collection('usersDoc').doc(currentUser!.uid)
+              .collection('usersDoc')
+              .doc(currentUser!.uid)
               .get();
-      
-      final DocumentReference<Map<String, dynamic>> collectionReference = await
-          FirebaseFirestore.instance.collection('Groups/${event.msgAndDocId.$2}/messages').add({
-            'id': currentUser.uid,
-            'text': event.msgAndDocId.$1,
-            'createdAt': Timestamp.now(),
-            'imageURL': userData['imageURL'],
-            'username': userData['userName']
-          });
+
+      final DocumentReference<Map<String, dynamic>> collectionReference =
+          await FirebaseFirestore.instance
+              .collection('Groups/${event.msgAndDocId.$2}/messages')
+              .add({
+        'id': currentUser.uid,
+        'text': event.msgAndDocId.$1,
+        'createdAt': Timestamp.now(),
+        'imageURL': userData['imageURL'],
+        'userName': userData['userName']
+      });
       emit(GroupDetailsSuccess());
     });
   }

@@ -4,9 +4,9 @@ import 'package:chatapp/services/userInfo_dto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:uuid/uuid.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as sysPathProvider;
+import 'package:uuid/uuid.dart';
 
 part 'UserDetailsState.dart';
 
@@ -51,7 +51,7 @@ class UserDetailsCubit extends Cubit<UserDetailState> {
   Future<File> getSelcetedImage() async {
     emit(UserDetailsInitialState());
     final XFile? receivedImage = await ImagePicker().pickImage(
-        source: ImageSource.gallery, imageQuality: 50, maxHeight: 150);
+        source: ImageSource.gallery, imageQuality: 80, maxHeight: 150);
 
     File storedImage = File(receivedImage!.path);
 

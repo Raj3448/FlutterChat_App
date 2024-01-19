@@ -1,9 +1,9 @@
 import 'package:auto_route/annotations.dart';
-import 'package:chatapp/Widgets/GroupWidget.dart';
-import 'package:chatapp/Widgets/homewidget.dart';
+import 'package:chatapp/Widgets/GroupChat/GroupWidget.dart';
+import 'package:chatapp/Widgets/chats/homewidget.dart';
 import 'package:chatapp/bloc/Auth/autth_bloc.dart';
 
-import 'package:chatapp/screens/createGrpScreen.dart';
+import 'package:chatapp/screens/GroupChats/createGrpScreen.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

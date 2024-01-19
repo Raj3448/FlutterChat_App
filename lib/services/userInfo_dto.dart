@@ -5,7 +5,7 @@ part 'userInfo_dto.g.dart';
 class UserDetails {
   @JsonKey(name: "id")
   String id;
-  @JsonKey(name: "username")
+  @JsonKey(name: "userName")
   String username;
   @JsonKey(name: "imageURL")
   String imageUrl;

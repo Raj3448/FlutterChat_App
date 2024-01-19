@@ -17,7 +17,7 @@ class SendNewMessageInGrp extends StatefulWidget {
 
 class _SendNewMessageInGrpState extends State<SendNewMessageInGrp> {
   String newMessage = '';
-
+  final TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,6 +28,7 @@ class _SendNewMessageInGrpState extends State<SendNewMessageInGrp> {
         children: [
           Expanded(
             child: TextField(
+              controller: _controller,
               focusNode: widget.focusNode,
               decoration: const InputDecoration(
                 label: Text('Send a message...'),
@@ -61,6 +62,7 @@ class _SendNewMessageInGrpState extends State<SendNewMessageInGrp> {
                             widget.documentId,
                           )));
                       widget.focusNode.unfocus();
+                      _controller.clear();
                     },
               icon: const Icon(Icons.send))
         ],

@@ -1,6 +1,6 @@
 
-import 'package:chatapp/Widgets/chat/messageContainerIndvidualChat.dart';
-import 'package:chatapp/Widgets/sendNewIndividualMsg.dart';
+import 'package:chatapp/Widgets/oldChat%20(version1)/messageContainerIndvidualChat.dart';
+import 'package:chatapp/Widgets/chats/sendNewIndividualMsg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

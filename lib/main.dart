@@ -6,7 +6,7 @@ import 'package:chatapp/bloc/GroupDetails/bloc/group_details_bloc.dart';
 import 'package:chatapp/cubit/UserDetailsCubit/UserDetailsCubit.dart';
 import 'package:chatapp/firebase_options.dart';
 
-import 'package:chatapp/screens/AuthScreen.dart';
+import 'package:chatapp/screens/Auth/AuthScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:auto_route/annotations.dart';
-import 'package:chatapp/Widgets/participantsList.dart';
+import 'package:chatapp/Widgets/GroupChat/participantsList.dart';
 import 'package:chatapp/bloc/GroupDetails/bloc/group_details_bloc.dart';
 import 'package:chatapp/cubit/UserDetailsCubit/UserDetailsCubit.dart';
 import 'package:chatapp/services/userInfo_dto.dart';

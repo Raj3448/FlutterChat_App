@@ -1,9 +1,9 @@
 import 'package:auto_route/annotations.dart';
-import 'package:chatapp/Widgets/chat/messages.dart';
-import 'package:chatapp/Widgets/chat/new_message.dart';
+import 'package:chatapp/Widgets/oldChat%20(version1)/messages.dart';
+import 'package:chatapp/Widgets/oldChat%20(version1)/new_message.dart';
 import 'package:chatapp/bloc/Auth/autth_bloc.dart';
 
-import 'package:chatapp/screens/AuthScreen.dart';
+import 'package:chatapp/screens/Auth/AuthScreen.dart';
 import 'package:chatapp/screens/loadingPage.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
