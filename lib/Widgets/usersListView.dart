@@ -1,16 +1,27 @@
 import 'package:chatapp/screens/chatWindow.dart';
+import 'package:chatapp/screens/group_chat_window.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class UsersListView extends StatelessWidget {
-  final dynamic user;
-  const UsersListView({required this.user, Key? key}) : super(key: key);
+  final QueryDocumentSnapshot<Map<String, dynamic>> user;
+
+  bool isGroup;
+
+  UsersListView({required this.user, required this.isGroup, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => ChatWindow(receiverInfo: user)));
+        if (isGroup) {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => GroupChatWindow(groupInfo: user,)));
+        } else {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ChatWindow(receiverInfo: user)));
+        }
       },
       child: Container(
         height: MediaQuery.of(context).size.height * 0.08,
@@ -27,10 +38,12 @@ class UsersListView extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               clipBehavior: Clip.antiAlias,
-              child: Image.network(user.data()['imageURL'], fit: BoxFit.cover),
+              child: Image.network(
+                  user.data()[isGroup ? 'groupImageURL' : 'imageURL'],
+                  fit: BoxFit.cover),
             ),
             title: Text(
-              user.data()['userName'],
+              user.data()[isGroup ? 'groupName' : 'userName'],
               style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,

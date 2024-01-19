@@ -28,9 +28,10 @@ class _CreateGrpScreenState extends State<CreateGrpScreen> {
       body: BlocConsumer<GroupDetailsBloc, GroupDetailsState>(
           listener: (context, state) {
         if (state is GroupDetailsFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(state.error),
-            duration: const Duration(seconds: 3),
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.error),
+              duration: const Duration(seconds: 3),
           ));
         }
         if (state is GroupDetailsSuccess) {

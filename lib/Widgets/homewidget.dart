@@ -56,6 +56,7 @@ class Chatwidget extends StatelessWidget {
                   if (userInfo!.uid != usersList[index].data()['id']) {
                     return UsersListView(
                       user: usersList[index],
+                      isGroup: false,
                     );
                   }
                   return Container();

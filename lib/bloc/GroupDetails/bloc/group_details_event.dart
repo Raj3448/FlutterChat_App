@@ -14,4 +14,10 @@ class AddGroupDetailsInDatabase extends GroupDetailsEvent {
     required this.userDetailList,
   });
 }
-class AddGroupImage extends GroupDetailsEvent{}
+
+class AddGroupMessage extends GroupDetailsEvent {
+  (String,String) msgAndDocId;
+  AddGroupMessage({
+    required this.msgAndDocId,
+  });
+}

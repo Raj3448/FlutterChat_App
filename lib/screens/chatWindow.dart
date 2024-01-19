@@ -45,21 +45,7 @@ class _ChatWindowState extends State<ChatWindow> {
     print('UniqueKey : $uniqueKey');
     return Scaffold(
       body: Center(
-        child: FutureBuilder(
-          future: FirebaseFirestore.instance
-              .collection('usersDoc')
-              .doc(user.uid)
-              .get(),
-          builder: (context, snapShot) {
-            if (snapShot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.07,
-                  child: Image.asset('assets/Images/loading.gif'),
-                ),
-              );
-            }
-            return GestureDetector(
+        child: GestureDetector(
               onTap: () {
                 onTapFunction(sendNewIndividualMsg!.getFocus);
               },
@@ -104,8 +90,8 @@ class _ChatWindowState extends State<ChatWindow> {
                     ),
                     Expanded(
                       child: Container(
-                        color: const Color.fromARGB(255, 237, 236, 236),
-                        height: MediaQuery.of(context).size.height * 0.85,
+                          color: const Color.fromARGB(255, 237, 236, 236),
+                          height: MediaQuery.of(context).size.height * 0.85,
                         child: StreamBuilder(
                             stream: FirebaseFirestore.instance
                                 .collection(
@@ -125,6 +111,11 @@ class _ChatWindowState extends State<ChatWindow> {
                                 );
                               }
                               final chatDoc = messagesData.data!.docs;
+                              if (chatDoc.isEmpty) {
+                                  return const Center(
+                                    child: Text('Start to chat'),
+                                  );
+                                }
                               print('Chat Document');
                               return ListView.builder(
                                 itemCount: chatDoc.length,
@@ -144,9 +135,9 @@ class _ChatWindowState extends State<ChatWindow> {
                     sendNewIndividualMsg!,
                   ],
                 ),
-              ),
-            );
-          },
+              
+            ),
+          
         ),
       ),
     );
