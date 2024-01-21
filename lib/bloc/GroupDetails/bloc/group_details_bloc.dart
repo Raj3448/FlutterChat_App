@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:chatapp/cubit/UserDetailsCubit/UserDetailsCubit.dart';
 import 'package:chatapp/services/userInfo_dto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:uuid/uuid.dart';
@@ -55,18 +57,15 @@ class GroupDetailsBloc extends Bloc<GroupDetailsEvent, GroupDetailsState> {
 
     on<AddGroupMessage>((event, emit) async {
       emit(GroupDetailsLoading());
-      final currentUser = FirebaseAuth.instance.currentUser;
-      final DocumentSnapshot<Map<String, dynamic>> userData =
-          await FirebaseFirestore.instance
-              .collection('usersDoc')
-              .doc(currentUser!.uid)
-              .get();
+      
+      final Map<String, dynamic>? userData =
+          await event.context.read<UserDetailsCubit>().getCurrentUserDetails();
 
       final DocumentReference<Map<String, dynamic>> collectionReference =
           await FirebaseFirestore.instance
               .collection('Groups/${event.msgAndDocId.$2}/messages')
               .add({
-        'id': currentUser.uid,
+        'id': userData!['id'],
         'text': event.msgAndDocId.$1,
         'createdAt': Timestamp.now(),
         'imageURL': userData['imageURL'],

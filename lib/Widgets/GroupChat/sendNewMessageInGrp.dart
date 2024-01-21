@@ -46,8 +46,9 @@ class _SendNewMessageInGrpState extends State<SendNewMessageInGrp> {
                           .add(AddGroupMessage(msgAndDocId: (
                             newMessage.trim(),
                             widget.documentId,
-                          )));
+                          ), context: context));
                       widget.focusNode.unfocus();
+                      _controller.clear();
                     },
             ),
           ),
@@ -60,7 +61,7 @@ class _SendNewMessageInGrpState extends State<SendNewMessageInGrp> {
                           .add(AddGroupMessage(msgAndDocId: (
                             newMessage.trim(),
                             widget.documentId,
-                          )));
+                          ), context: context));
                       widget.focusNode.unfocus();
                       _controller.clear();
                     },

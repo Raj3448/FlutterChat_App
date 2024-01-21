@@ -1,8 +1,9 @@
 import 'package:auto_route/annotations.dart';
 import 'package:chatapp/Widgets/GroupChat/GroupWidget.dart';
+import 'package:chatapp/Widgets/Profile/profileWidget.dart';
 import 'package:chatapp/Widgets/chats/homewidget.dart';
 import 'package:chatapp/bloc/Auth/autth_bloc.dart';
-
+import 'package:chatapp/cubit/UserDetailsCubit/UserDetailsCubit.dart';
 import 'package:chatapp/screens/GroupChats/createGrpScreen.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class _RootScreenState extends State<RootScreen> {
     _widgetList = [
       const Chatwidget(),
       const GroupWidget(),
-      const GroupWidget()
+      const ProfileWidget()
     ];
     super.initState();
   }
@@ -37,39 +38,98 @@ class _RootScreenState extends State<RootScreen> {
         builder: (context, state) {
           return SingleChildScrollView(
             physics: const NeverScrollableScrollPhysics(),
-            child: Column(
+            child: Stack(
               children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.1,
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 167, 133, 245),
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(30),
-                          bottomRight: Radius.circular(30))),
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            _getString(_selectedIndex),
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold),
+                Column(
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 167, 133, 245),
+                        gradient: LinearGradient(
+                            colors: [
+                              Color.fromARGB(255, 82, 0, 224),
+                              Color.fromARGB(255, 178, 145, 235),
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter),
+                      ),
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                _getString(_selectedIndex),
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              const Icon(
+                                Icons.notifications,
+                                color: Colors.black45,
+                              )
+                            ],
                           ),
-                          const Icon(
-                            Icons.notifications,
-                            color: Colors.black45,
-                          )
-                        ],
+                        ),
                       ),
                     ),
-                  ),
+                    _widgetList[_selectedIndex]
+                  ],
                 ),
-                _widgetList[_selectedIndex]
+                if (_selectedIndex == 2)
+                  FutureBuilder(
+                      future: context
+                          .read<UserDetailsCubit>()
+                          .getCurrentUserDetails(),
+                      builder: (context, userDetails) {
+                        if (userDetails.data == null) {
+                          return Container();
+                        }
+                        return Positioned.fill(
+                          top: MediaQuery.of(context).size.height * 0.05,
+                          child: Column(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 10.0,
+                                      left: 10,
+                                      right: 10,
+                                      bottom: 0),
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.12,
+                                    decoration: const BoxDecoration(
+                                        color: Colors.black,
+                                        shape: BoxShape.circle),
+                                    clipBehavior: Clip.antiAlias,
+                                    child: Image.network(
+                                        userDetails.data!['imageURL']),
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                userDetails.connectionState ==
+                                        ConnectionState.waiting
+                                    ? ' ---- '
+                                    : userDetails.data!['userName'],
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                        );
+                      }),
               ],
             ),
           );
@@ -80,8 +140,8 @@ class _RootScreenState extends State<RootScreen> {
               shape: const CircleBorder(),
               backgroundColor: const Color.fromARGB(255, 167, 133, 245),
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => CreateGrpScreen()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => CreateGrpScreen()));
               },
               child: const Icon(
                 Icons.add,

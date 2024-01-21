@@ -1,6 +1,7 @@
 import 'dart:io';
-
 import 'package:chatapp/services/userInfo_dto.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,6 +16,10 @@ class UserDetailsCubit extends Cubit<UserDetailState> {
 
   List<UserDetails> _SelectedUserList = [];
 
+  final userData = FirebaseAuth.instance.currentUser;
+
+  Map<String, dynamic>? userDetails;
+
   get getSelectedUserList {
     return [..._SelectedUserList];
   }
@@ -22,6 +27,23 @@ class UserDetailsCubit extends Cubit<UserDetailState> {
   bool getIsUserDetailsIsExisted(String id) {
     bool isExist = _SelectedUserList.any((element) => (element.id == id));
     return isExist;
+  }
+
+  Future<Map<String, dynamic>?> getCurrentUserDetails() async {
+    if (userDetails != null) {
+      return userDetails;
+    }
+    DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+        await FirebaseFirestore.instance
+            .collection('usersDoc')
+            .doc(userData!.uid)
+            .get();
+    if (documentSnapshot.exists) {
+      userDetails = documentSnapshot.data();
+      return userDetails;
+    } else {
+      return null;
+    }
   }
 
   void addUserDetailsInList(UserDetails userDetails) {

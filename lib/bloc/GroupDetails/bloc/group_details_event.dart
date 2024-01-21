@@ -16,8 +16,10 @@ class AddGroupDetailsInDatabase extends GroupDetailsEvent {
 }
 
 class AddGroupMessage extends GroupDetailsEvent {
-  (String,String) msgAndDocId;
+  (String, String) msgAndDocId;
+  BuildContext context;
   AddGroupMessage({
     required this.msgAndDocId,
+    required this.context,
   });
 }
