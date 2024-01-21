@@ -12,3 +12,5 @@ final class UserDetailsSuccessState extends UserDetailState {
 }
 
 final class UserDetailsFailureState extends UserDetailState {}
+
+final class UserDetailsLoadingState extends UserDetailState {}

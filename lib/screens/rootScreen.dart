@@ -94,7 +94,7 @@ class _RootScreenState extends State<RootScreen> {
                           child: Column(
                             children: [
                               Container(
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Colors.white,
                                 ),
@@ -125,7 +125,7 @@ class _RootScreenState extends State<RootScreen> {
                                     color: Colors.black,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
-                              )
+                              ),
                             ],
                           ),
                         );

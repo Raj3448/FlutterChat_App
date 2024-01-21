@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:chatapp/services/userInfo_dto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,20 +31,20 @@ class UserDetailsCubit extends Cubit<UserDetailState> {
   }
 
   Future<Map<String, dynamic>?> getCurrentUserDetails() async {
-    if (userDetails != null) {
-      return userDetails;
-    }
+    emit(UserDetailsLoadingState());
     DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
         await FirebaseFirestore.instance
             .collection('usersDoc')
             .doc(userData!.uid)
             .get();
     if (documentSnapshot.exists) {
-      userDetails = documentSnapshot.data();
-      return userDetails;
+      emit(UserDetailsSuccessState(selectedUserDetails: _SelectedUserList));
+      return documentSnapshot.data();
     } else {
+      emit(UserDetailsSuccessState(selectedUserDetails: _SelectedUserList));
       return null;
     }
+
   }
 
   void addUserDetailsInList(UserDetails userDetails) {
@@ -54,6 +55,19 @@ class UserDetailsCubit extends Cubit<UserDetailState> {
     }
     _SelectedUserList.add(userDetails);
     emit(UserDetailsSuccessState(selectedUserDetails: _SelectedUserList));
+  }
+
+  void updateUserName(String userName) async {
+    try {
+      print("I am here Raj Bro");
+      DocumentReference<Map<String, dynamic>> documentReference =
+          FirebaseFirestore.instance.collection('usersDoc').doc(userData!.uid);
+      await documentReference.update({
+        'userName': userName,
+      });
+    } catch (error) {
+      print(error.toString);
+    }
   }
 
   void removeUserDetailsInList({required String id}) {
