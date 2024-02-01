@@ -4,7 +4,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:chatapp/Widgets/GroupChat/participantsList.dart';
 import 'package:chatapp/bloc/GroupDetails/bloc/group_details_bloc.dart';
 import 'package:chatapp/cubit/UserDetailsCubit/UserDetailsCubit.dart';
-import 'package:chatapp/services/userInfo_dto.dart';
+import 'package:chatapp/models/userInfo_dto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

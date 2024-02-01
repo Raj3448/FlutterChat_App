@@ -4,6 +4,7 @@ part of 'group_details_bloc.dart';
 @immutable
 sealed class GroupDetailsEvent {}
 
+// ignore: must_be_immutable
 class AddGroupDetailsInDatabase extends GroupDetailsEvent {
   String? groupName;
   File? groupImage;
@@ -15,6 +16,7 @@ class AddGroupDetailsInDatabase extends GroupDetailsEvent {
   });
 }
 
+// ignore: must_be_immutable
 class AddGroupMessage extends GroupDetailsEvent {
   (String, String) msgAndDocId;
   BuildContext context;

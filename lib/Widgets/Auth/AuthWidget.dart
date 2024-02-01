@@ -59,48 +59,6 @@ class _AuthWidgetState extends State<AuthWidget> {
     _globalKey.currentState!.save();
 
     context.read<AuthBloc>().add(AuthLoginRequested(username: userName,email: email!,password: password!,isLogin: _isLogin, context: context,storedImage: _storedImage));
-    //===================================
-
-    // print('I am here');
-    // final _auth = Provider.of<Auth>(context, listen: false);
-    // if (_isLogin) {
-    //   await _auth.signInWithEmailAndPassword(email!, password!, context);
-    // } else {
-    //   await _auth.createUserWithEmailAndPassword(
-    //       email!, password!, _storedImage, context);
-    //   final UID = _auth.UID;
-    //   if (UID != null) {
-    //     FirebaseFirestore.instance.collection('usersDoc').doc(UID).set({
-    //       'userName': userName,
-    //       'email': email,
-    //       'imageURL': _auth.getimageURL
-    //     });
-    //   }
-    // }
-
-    //=======================================
-
-    // try {
-    //   GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    //   GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-    //   AuthCredential credential = GoogleAuthProvider.credential(
-    //     accessToken: googleAuth?.accessToken,
-    //     idToken: googleAuth?.idToken,
-    //   );
-
-    //   UserCredential userCredential =
-    //       await FirebaseAuth.instance.signInWithCredential(credential);
-    //   debugPrint('User name : ${userCredential.user?.displayName}');
-    // } on PlatformException catch (e) {
-    //   if (e.code == GoogleSignIn.kNetworkError) {
-    //     String errorMessage =
-    //         "A network error (such as timeout, interrupted connection or unreachable host) has occurred.";
-    //     debugPrint(errorMessage);
-    //   } else {
-    //     String errorMessage = "Something went wrong.";
-    //     debugPrint(errorMessage);
-    //   }
-    // }
 
     setState(() {
       _isLoading = false;

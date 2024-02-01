@@ -39,7 +39,7 @@ class MessageContainerIndvidualChat extends StatelessWidget {
                 : null,
             decoration: BoxDecoration(
                 color: !isMe
-                    ? const Color.fromARGB(255, 176, 176, 176)
+                    ? Color.fromARGB(255, 214, 214, 214)
                     : const Color.fromARGB(255, 50, 145, 240),
                 borderRadius: BorderRadius.only(
                     bottomLeft: const Radius.circular(12),

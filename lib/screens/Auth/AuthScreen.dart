@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthScreen extends StatefulWidget {
+  static const routeName = '/authSCreen';
   const AuthScreen({super.key});
 
   @override
@@ -14,7 +15,6 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   AuthWidget authWidget = AuthWidget();
-  static String? _receivedUID;
 
 //LogIn Mode
 
@@ -35,7 +35,6 @@ class _AuthScreenState extends State<AuthScreen> {
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => RootScreen()),
-                //const MyHomePage(title: 'ChatHUB')),
                 (route) => false);
           }
         },

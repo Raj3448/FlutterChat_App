@@ -1,11 +1,10 @@
 import 'dart:io';
 
 import 'package:chatapp/cubit/UserDetailsCubit/UserDetailsCubit.dart';
-import 'package:chatapp/services/userInfo_dto.dart';
+import 'package:chatapp/models/userInfo_dto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,7 +33,7 @@ class GroupDetailsBloc extends Bloc<GroupDetailsEvent, GroupDetailsState> {
           .ref()
           .child('GroupImage')
           .child('$uniqueId.jpg');
-      final TaskSnapshot imageSnapShot = await imageRefrence
+      await imageRefrence
           .putFile(event.groupImage!)
           .whenComplete(
               () => print('GroupImage Uploaded Successfully.....!!!'));
@@ -61,7 +60,7 @@ class GroupDetailsBloc extends Bloc<GroupDetailsEvent, GroupDetailsState> {
       final Map<String, dynamic>? userData =
           await event.context.read<UserDetailsCubit>().getCurrentUserDetails();
 
-      final DocumentReference<Map<String, dynamic>> collectionReference =
+      
           await FirebaseFirestore.instance
               .collection('Groups/${event.msgAndDocId.$2}/messages')
               .add({

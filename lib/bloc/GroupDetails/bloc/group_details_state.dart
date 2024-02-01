@@ -9,6 +9,7 @@ final class GroupDetailsLoading extends GroupDetailsState {}
 
 final class GroupDetailsSuccess extends GroupDetailsState {}
 
+// ignore: must_be_immutable
 final class GroupImageGetSuccessfully extends GroupDetailsState {
   File storedImage;
   GroupImageGetSuccessfully({required this.storedImage});

@@ -3,6 +3,7 @@ import 'package:chatapp/screens/GroupChats/group_chat_window.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class UsersListView extends StatelessWidget {
   final QueryDocumentSnapshot<Map<String, dynamic>> user;
 
@@ -16,8 +17,10 @@ class UsersListView extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (isGroup) {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => GroupChatWindow(groupInfo: user,)));
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => GroupChatWindow(
+                    groupInfo: user,
+                  )));
         } else {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ChatWindow(receiverInfo: user)));
@@ -27,7 +30,7 @@ class UsersListView extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.08,
         margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
         decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 236, 235, 235),
+            // color: const Color.fromARGB(255, 236, 235, 235),
             borderRadius: BorderRadius.circular(20)),
         child: Center(
           child: ListTile(

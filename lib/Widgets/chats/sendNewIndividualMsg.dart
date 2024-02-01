@@ -52,7 +52,7 @@ class _SendNewIndividualMsgState extends State<SendNewIndividualMsg> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.8,
+      width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.08,
       margin: const EdgeInsets.all(5),
       child: Row(
@@ -62,8 +62,13 @@ class _SendNewIndividualMsgState extends State<SendNewIndividualMsg> {
               controller: _controller,
               focusNode: widget.focusNode,
               decoration: const InputDecoration(
-                label: Text('Send a message...'),
-              ),
+                  hintText: 'Send a message...',
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                  )),
               onChanged: (val) {
                 setState(() {
                   newMessage = val;
@@ -72,9 +77,21 @@ class _SendNewIndividualMsgState extends State<SendNewIndividualMsg> {
               onSubmitted: newMessage.trim().isEmpty ? null : (_) => _submit(),
             ),
           ),
-          IconButton(
-              onPressed: newMessage.trim().isEmpty ? null : _submit,
-              icon: const Icon(Icons.send))
+          const SizedBox(
+            width: 10,
+          ),
+          Container(
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.fromARGB(255, 152, 98, 245)),
+            child: IconButton(
+                onPressed: newMessage.trim().isEmpty ? null : _submit,
+                icon: const Icon(
+                  Icons.send,
+                  size: 30,
+                  color: Colors.white,
+                )),
+          )
         ],
       ),
     );

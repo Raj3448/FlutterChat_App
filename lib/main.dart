@@ -42,6 +42,9 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           home: const AuthScreen(),
+          routes: {
+            AuthScreen.routeName:(context) => const AuthScreen(),
+          },
           ),
     );
   }

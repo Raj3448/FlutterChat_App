@@ -41,9 +41,18 @@ class _GroupChatWindowState extends State<GroupChatWindow> {
                     builder: (context) =>
                         GroupDetailsView(groupInfo: widget.groupInfo)));
               },
-              child: Card(
-                elevation: 10,
-                color: const Color(0xffd9edf8),
+              child: Container(
+                 height: MediaQuery.of(context).size.height * 0.1,
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 167, 133, 245),
+                        gradient: LinearGradient(
+                            colors: [
+                              Color.fromARGB(255, 82, 0, 224),
+                              Color.fromARGB(255, 178, 145, 235),
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter),),
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,
                   child: Padding(

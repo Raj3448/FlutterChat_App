@@ -1,4 +1,6 @@
+import 'package:chatapp/bloc/Auth/autth_bloc.dart';
 import 'package:chatapp/cubit/UserDetailsCubit/UserDetailsCubit.dart';
+import 'package:chatapp/screens/Auth/AuthScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -78,13 +80,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          if (userName!.trim() != null) {
-                            context
-                                .read<UserDetailsCubit>()
-                                .updateUserName(userName!.trim());
-                            setState(() {});
-                            Navigator.of(context).pop();
-                          }
+                          context
+                              .read<UserDetailsCubit>()
+                              .updateUserName(userName!.trim());
+                          setState(() {});
+                          Navigator.of(context).pop();
                         },
                         child: const Text('Save')),
                   ],
@@ -99,106 +99,134 @@ class _ProfileWidgetState extends State<ProfileWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.9,
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30), topRight: Radius.circular(30)),
-      ),
-      child: FutureBuilder(
-          future: context.read<UserDetailsCubit>().getCurrentUserDetails(),
-          builder: (context, userDetails) {
-            return Column(
-              children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.15,
-                      ),
-                      ListTile(
-                        onTap: () {
-                          _showBottomSheet(context);
-                          _focusNode.requestFocus();
-                        },
-                        titleAlignment: ListTileTitleAlignment.top,
-                        leading: const Icon(
-                          Icons.person,
-                          size: 30,
-                          color: Colors.black,
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthInitial) {
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(AuthScreen.routeName, (route) => false);
+        }
+      },
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.9,
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+        ),
+        child: FutureBuilder(
+            future: context.read<UserDetailsCubit>().getCurrentUserDetails(),
+            builder: (context, userDetails) {
+              return Column(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.15,
                         ),
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Name',
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              userDetails.connectionState ==
-                                      ConnectionState.waiting
-                                  ? ' ---- '
-                                  : userDetails.data!['userName'],
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            const Text(
-                              'This is your username or pin and this name will visible to your ChatBox App contacts',
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                        ListTile(
+                          onTap: () {
+                            _showBottomSheet(context);
+                            _focusNode.requestFocus();
+                          },
+                          titleAlignment: ListTileTitleAlignment.top,
+                          leading: const Icon(
+                            Icons.person,
+                            size: 30,
+                            color: Colors.black,
+                          ),
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Name',
+                                style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                userDetails.connectionState ==
+                                        ConnectionState.waiting
+                                    ? ' ---- '
+                                    : userDetails.data!['userName'],
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              const Text(
+                                'This is your username or pin and this name will visible to your ChatBox App contacts',
+                                style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          trailing: const Icon(Icons.edit),
                         ),
-                        trailing: const Icon(Icons.edit),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      ListTile(
-                        titleAlignment: ListTileTitleAlignment.top,
-                        leading: const Icon(
-                          Icons.mail_outline_rounded,
-                          size: 30,
-                          color: Colors.black,
+                        const SizedBox(
+                          height: 10,
                         ),
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Email',
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              userDetails.connectionState ==
-                                      ConnectionState.waiting
-                                  ? ' ---- '
-                                  : userDetails.data!['email'],
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                        ListTile(
+                          titleAlignment: ListTileTitleAlignment.top,
+                          leading: const Icon(
+                            Icons.mail_outline_rounded,
+                            size: 30,
+                            color: Colors.black,
+                          ),
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Email',
+                                style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                userDetails.connectionState ==
+                                        ConnectionState.waiting
+                                    ? ' ---- '
+                                    : userDetails.data!['email'],
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
                         ),
-                      )
-                    ],
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        ListTile(
+                          onTap: () {
+                            context.read<AuthBloc>().add(AuthLogOutRequested());
+                          },
+                          leading: const Icon(
+                            Icons.logout_rounded,
+                            size: 30,
+                            color: Colors.black,
+                          ),
+                          title: const Text(
+                            'Sign Out',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            );
-          }),
+                ],
+              );
+            }),
+      ),
     );
   }
 }

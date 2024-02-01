@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:chatapp/cubit/UserDetailsCubit/UserDetailsCubit.dart';
-import 'package:chatapp/services/userInfo_dto.dart';
+import 'package:chatapp/models/userInfo_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

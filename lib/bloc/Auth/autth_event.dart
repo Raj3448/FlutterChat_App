@@ -4,6 +4,7 @@ part of 'autth_bloc.dart';
 @immutable
 sealed class AuthEvent {}
 
+// ignore: must_be_immutable
 class AuthLoginRequested extends AuthEvent {
   final String? username;
   String email;

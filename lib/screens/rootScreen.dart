@@ -42,8 +42,10 @@ class _RootScreenState extends State<RootScreen> {
               children: [
                 Column(
                   children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.1,
+                    AnimatedContainer(
+                      height: _selectedIndex == 0
+                          ? MediaQuery.of(context).size.height * 0.2
+                          : MediaQuery.of(context).size.height * 0.1,
                       width: double.infinity,
                       decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 167, 133, 245),
@@ -55,25 +57,68 @@ class _RootScreenState extends State<RootScreen> {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter),
                       ),
+                      duration: const Duration(milliseconds: 1000),
                       child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                _getString(_selectedIndex),
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0,
                               ),
-                              const Icon(
-                                Icons.notifications,
-                                color: Colors.black45,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    _getString(_selectedIndex),
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const Icon(
+                                    Icons.notifications,
+                                    color: Colors.black45,
+                                  )
+                                ],
+                              ),
+                            ),
+                            if (_selectedIndex == 0)
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.05,
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                      prefixIcon: const Icon(Icons.search),
+                                      prefixIconColor: Colors.black,
+                                      fillColor: Colors.white24,
+                                      filled: true,
+                                      border:
+                                          InputBorder.none, // Remove the border
+                                      hintText: 'Search',
+                                      hintStyle: const TextStyle(
+                                          color: Colors
+                                              .white), // Optional: Customize the hint text color
+                                      contentPadding: const EdgeInsets
+                                          .symmetric(
+                                          vertical: 15.0,
+                                          horizontal:
+                                              10.0), // Optional: Adjust content padding
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide:
+                                              const BorderSide(width: 0.01),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide:
+                                              const BorderSide(width: 0.01),
+                                          borderRadius:
+                                              BorderRadius.circular(10))),
+                                ),
                               )
-                            ],
-                          ),
+                          ],
                         ),
                       ),
                     ),

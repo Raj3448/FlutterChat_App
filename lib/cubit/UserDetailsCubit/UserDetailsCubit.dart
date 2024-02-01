@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:chatapp/services/userInfo_dto.dart';
+import 'package:chatapp/models/userInfo_dto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -71,6 +71,7 @@ class UserDetailsCubit extends Cubit<UserDetailState> {
   }
 
   void removeUserDetailsInList({required String id}) {
+    
     emit(UserDetailsInitialState());
 
     _SelectedUserList.removeWhere((element) => element.id == id);
