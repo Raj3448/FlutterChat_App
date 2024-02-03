@@ -54,6 +54,7 @@ class _ChatWindowState extends State<ChatWindow> {
                 Container(
                   height: MediaQuery.of(context).size.height * 0.1,
                   width: double.infinity,
+                
                   decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 167, 133, 245),
                     gradient: LinearGradient(colors: [
